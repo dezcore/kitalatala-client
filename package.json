@@ -9,6 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/cache": "latest",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@fontsource/roboto": "^5.0.8",
+    "@mui/icons-material": "latest",
+    "@mui/material": "^5.14.10",
     "eslint": "8.50.0",
     "eslint-config-next": "13.5.2",
     "next": "13.5.2",
