@@ -3,6 +3,7 @@ version: '3.4'
 services:
   kitalatalaclient:
     image: kitalatalaclient
+    container_name: kitalatala
     working_dir: /app
     build:
       context: .
@@ -12,3 +13,7 @@ services:
     volumes:
       - .:/app
       - '/app/node_modules'
+      - out:/app/out
+
+volumes:
+  out:

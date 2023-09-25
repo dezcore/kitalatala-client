@@ -21,13 +21,32 @@ build() {
     docker compose up
 }
 
-if [[ "$1" == "default" ]];then
-    fonctiondetest
-    elif [[ "$1" == "run" ]];then
-    run
-    elif [[ "$1" == "build" ]];then
-    build
-    elif [[ "$1" == "clean" ]];then
+prodstage() {
     clean
+    docker build -t kitalatalaclient . --target prod-stage
+    docker compose up
+}
+
+deploy() {
+    build &&
+    cd kitalatala-deploy &&
+    docker run --rm --volumes-from kitalatala -v $PWD:/kitalatala-deploy ubuntu tar cvf /kitalatala-deploy/kitalatala.tar /app/out &&
+    tar -xvf kitalatala.tar &&
+    cp -a ./app/out/. ./out &&
+    ls
+}
+
+if [[ "$1" == "default" ]];then
+fonctiondetest
+elif [[ "$1" == "run" ]];then
+run
+elif [[ "$1" == "build" ]];then
+build
+elif [[ "$1" == "prodstage" ]];then
+prodstage
+elif [[ "$1" == "deploy" ]];then
+deploy
+elif [[ "$1" == "clean" ]];then
+clean
 fi
 #run
