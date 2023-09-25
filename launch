@@ -1,0 +1,33 @@
+#!/bin/bash
+
+fonctiondetest() {
+    echo "Hello world !" $1
+}
+
+clean() {
+    docker compose down -v
+    docker image prune -a -f
+}
+
+run() {
+    clean
+    docker build -t kitalatalaclient . --target dev
+    docker compose up
+}
+
+build() {
+    clean
+    docker build -t kitalatalaclient . --target prod
+    docker compose up
+}
+
+if [[ "$1" == "default" ]];then
+    fonctiondetest
+    elif [[ "$1" == "run" ]];then
+    run
+    elif [[ "$1" == "build" ]];then
+    build
+    elif [[ "$1" == "clean" ]];then
+    clean
+fi
+#run
